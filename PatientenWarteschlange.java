@@ -23,30 +23,38 @@ public class PatientenWarteschlange {
     public String entfernePatient(int pnr) {
         String s = "Patient gelöscht: ";
         for (int i = 0; i < pw.length; i++) {
-            if(pw[i] != null && pw[i].getPnr() == pnr){
+            if (pw[i] != null && pw[i].getPnr() == pnr) {
                 s += pw[i].getPnr() + "\t" + pw[i].getName();
                 pw[i] = null;
                 return s;
             }
             // if (pw[i] != null && pw[i].getPnr() == pnr && getLaengeSchlange() != 0) {
-            //     // pw[i] = null;
-            //     pw[i] = pw[getLaengeSchlange()];
-            //     if(pw[i] == null){
-            //         throw new IllegalStateException("Ungültiger Wert für pw[i]");
-            //     }
-            //     s += pw[i].getPnr() + "\t" + pw[i].getName();
-            //     pw[getLaengeSchlange()] = null;
-            //     //return "Patient gelöscht: " + pw[i].getPnr() + "\t" + pw[i].getName();
-            //     //return "Patient gelöscht: ";
-            //     return s;
+            // // pw[i] = null;
+            // pw[i] = pw[getLaengeSchlange()];
+            // if(pw[i] == null){
+            // throw new IllegalStateException("Ungültiger Wert für pw[i]");
+            // }
+            // s += pw[i].getPnr() + "\t" + pw[i].getName();
+            // pw[getLaengeSchlange()] = null;
+            // //return "Patient gelöscht: " + pw[i].getPnr() + "\t" + pw[i].getName();
+            // //return "Patient gelöscht: ";
+            // return s;
             // }
         }
         return "Patient nicht gefunden";
     }
 
     public Patient derNaechsteBitte() {
-        Patient derNaechste = pw[0];
-        return derNaechste;
+        if (pw[0] == null) {
+            throw new IllegalStateException("Kein Patient vorhanden");
+        }
+        return pw[0];
+        // String s = "Nächster Patient: ";
+        // if (pw[0] == null) {
+        // return "Kein Patient in der Warteschlange";
+        // }
+        // s += pw[0].getPnr() + "\t" + pw[0].getName();
+        // return s;
 
     }
 
@@ -77,9 +85,8 @@ public class PatientenWarteschlange {
         for (int i = 0; i < pw.length; i++) {
             if (pw[i] != null) {
                 s += i + "\t" + pw[i].getPnr() + "\t" + pw[i].getName() + "\n";
-            }
-            else {
-                s +=i + "\t" + "Warteliste Position " + i + " ist null\n";
+                // } else {
+                // s += i + "\t" + "Warteliste Position " + i + " ist null\n";
             }
         }
         return s;
